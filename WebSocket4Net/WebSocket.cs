@@ -204,15 +204,12 @@ namespace WebSocket4Net
             return remoteEndPoint;
         }
 
-        TcpClientSession CreateClient(string uri)
+        TcpClientSession CreateClient(string uri,string handscakeHost)
         {
             int port;
             var targetEndPoint = m_RemoteEndPoint = ResolveUri(uri, 80, out port);
 
-            if (port == 80)
-                HandshakeHost = TargetUri.Host;
-            else
-                HandshakeHost = TargetUri.Host + ":" + port;
+         HandshakeHost = handscakeHost;
 
             return new AsyncTcpSession();
         }
@@ -264,7 +261,7 @@ namespace WebSocket4Net
         }
 #endif
 
-        private void Initialize(string uri, string subProtocol, List<KeyValuePair<string, string>> cookies, List<KeyValuePair<string, string>> customHeaderItems, string userAgent, string origin, WebSocketVersion version, EndPoint httpConnectProxy, int receiveBufferSize)
+        private void Initialize(string uri, string handshakeHost, string subProtocol, List<KeyValuePair<string, string>> cookies, List<KeyValuePair<string, string>> customHeaderItems, string userAgent, string origin, WebSocketVersion version, EndPoint httpConnectProxy, int receiveBufferSize)
         {
             if (version == WebSocketVersion.None)
             {
@@ -319,7 +316,7 @@ namespace WebSocket4Net
 
             if (uri.StartsWith(m_UriPrefix, StringComparison.OrdinalIgnoreCase))
             {
-                client = CreateClient(uri);
+                client = CreateClient(uri, handshakeHost);
             }
             else if (uri.StartsWith(m_SecureUriPrefix, StringComparison.OrdinalIgnoreCase))
             {

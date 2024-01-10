@@ -61,39 +61,39 @@ namespace WebSocket4Net
 
         }
 
-        public JsonWebSocket(string uri, List<KeyValuePair<string, string>> cookies)
-            : this(uri, string.Empty, cookies, WebSocketVersion.None)
+        public JsonWebSocket(string uri, string handshakeHoststring, List<KeyValuePair<string, string>> cookies)
+            : this(uri,  handshakeHoststring, string.Empty, cookies, WebSocketVersion.None)
         {
 
         }
 
-        public JsonWebSocket(string uri, string subProtocol, List<KeyValuePair<string, string>> cookies)
-            : this(uri, subProtocol, cookies, WebSocketVersion.None)
+        public JsonWebSocket(string uri, string handshakeHoststring, string subProtocol, List<KeyValuePair<string, string>> cookies)
+            : this(uri,  handshakeHoststring, subProtocol, cookies, WebSocketVersion.None)
         {
 
         }
 
-        public JsonWebSocket(string uri, string subProtocol, WebSocketVersion version)
-            : this(uri, subProtocol, null, version)
+        public JsonWebSocket(string uri, string handshakeHoststring, string subProtocol, WebSocketVersion version)
+            : this(uri,  handshakeHoststring, subProtocol, null, version)
         {
 
         }
 
-        public JsonWebSocket(string uri, string subProtocol, List<KeyValuePair<string, string>> cookies, WebSocketVersion version)
-            : this(uri, subProtocol, cookies, null, string.Empty, string.Empty, version)
+        public JsonWebSocket(string uri, string handshakeHoststring,string subProtocol, List<KeyValuePair<string, string>> cookies, WebSocketVersion version)
+            : this(uri, handshakeHoststring, subProtocol, cookies, null, string.Empty, string.Empty, version)
         {
 
         }
 
-        public JsonWebSocket(string uri, string subProtocol, List<KeyValuePair<string, string>> cookies, List<KeyValuePair<string, string>> customHeaderItems, string userAgent, WebSocketVersion version)
-            : this(uri, subProtocol, cookies, customHeaderItems, userAgent, string.Empty, version)
+        public JsonWebSocket(string uri, string handshakeHoststring, string subProtocol, List<KeyValuePair<string, string>> cookies, List<KeyValuePair<string, string>> customHeaderItems, string userAgent, WebSocketVersion version)
+            : this(uri,  handshakeHoststring, subProtocol, cookies, customHeaderItems, userAgent, string.Empty, version)
         {
 
         }
 
-        public JsonWebSocket(string uri, string subProtocol, List<KeyValuePair<string, string>> cookies, List<KeyValuePair<string, string>> customHeaderItems, string userAgent, string origin, WebSocketVersion version)
+        public JsonWebSocket(string uri, string handshakeHost,string subProtocol, List<KeyValuePair<string, string>> cookies, List<KeyValuePair<string, string>> customHeaderItems, string userAgent, string origin, WebSocketVersion version)
         {
-            m_WebSocket = new WebSocket(uri, subProtocol, cookies, customHeaderItems, userAgent, origin, version);
+            m_WebSocket = new WebSocket(uri, handshakeHost ,subProtocol, cookies, customHeaderItems, userAgent, origin, version);
             m_WebSocket.EnableAutoSendPing = true;
             SubscribeEvents();
         }
